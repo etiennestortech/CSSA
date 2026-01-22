@@ -1483,10 +1483,46 @@ footer {
         justify-content: center;
     }
 
-    .calendar-header,
+    .calendar-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .calendar-header {
+        display: none;
+    }
+
     .calendar-body {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .day-column {
+        background: var(--white);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-column::before {
+        content: attr(data-day);
+        display: block;
+        background: var(--navy);
+        color: var(--white);
+        padding: 1.25rem 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .day-column .time-block:first-child {
+        margin-top: 0.5rem;
+    }
+
+    .day-column .time-block:last-child {
+        margin-bottom: 0.5rem;
     }
 
     .day-header {
@@ -1503,19 +1539,29 @@ footer {
     }
 
     .time-block {
-        padding: 1rem;
+        padding: 1.25rem 1.5rem;
+        margin: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
     }
 
     .time-block .time {
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
+        margin-bottom: 0.625rem;
     }
 
     .time-block .event-title {
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+    }
+
+    .time-block .event-icon {
+        width: 1rem;
+        height: 1rem;
     }
 
     .time-block .event-location {
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
+        margin-top: 0.5rem;
     }
 
     .button-group {
