@@ -69,8 +69,81 @@
                     <a href="#" class="nav-link">ABOUT</a>
                     <a href="#" class="nav-link">CONTACT</a>
                 </nav>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
         </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <img src="CSSA.webp" alt="Canadian Self Storage Association">
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-section utility">
+                <a href="#" class="mobile-nav-item">MEMBERS</a>
+                <a href="#" class="mobile-nav-item">NEWS</a>
+            </div>
+            <div class="mobile-nav-section">
+                <a href="#" class="mobile-nav-item">EVENTS</a>
+
+                <div class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">
+                        MEMBERSHIP
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="#" class="mobile-nav-dropdown-item">CSSA BY-LAWS</a>
+                        <a href="#" class="mobile-nav-dropdown-item">BEST PRACTICES GUIDES</a>
+                        <a href="#" class="mobile-nav-dropdown-item">MY PROFILE</a>
+                        <a href="#" class="mobile-nav-dropdown-item">MY EVENTS</a>
+                        <a href="#" class="mobile-nav-dropdown-item">MEMBERSHIP DIRECTORY</a>
+                        <a href="#" class="mobile-nav-dropdown-item">DISCUSSION FORUM</a>
+                        <a href="#" class="mobile-nav-dropdown-item">CLASSIFIEDS</a>
+                        <a href="#" class="mobile-nav-dropdown-item">VIDEOS</a>
+                    </div>
+                </div>
+
+                <div class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">
+                        CSSA INITIATIVES
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="#" class="mobile-nav-dropdown-item">CSSA FUNDRAISING CAMPAIGN</a>
+                        <a href="#" class="mobile-nav-dropdown-item">LIEN LAW PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">ONTARIO PROPERTY TAX PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">BRITISH COLUMBIA PROPERTY TAX PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">ATLANTIC CANADA PROPERTY TAX PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">NATIONAL BUILDING CODE PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">ACTIVE/PASSIVE TAX PROJECT</a>
+                        <a href="#" class="mobile-nav-dropdown-item">PROPERTY TAX REBATES IN ONTARIO</a>
+                    </div>
+                </div>
+
+                <a href="#" class="mobile-nav-item">ABOUT</a>
+                <a href="#" class="mobile-nav-item">CONTACT</a>
+            </div>
+        </div>
+        <div class="mobile-nav-actions">
+            <div class="mobile-nav-phone">
+                <i data-lucide="phone"></i>
+                <a href="tel:519-938-2665">519-938-2665</a>
+            </div>
+            <a href="#" class="btn-login">
+                <i data-lucide="user" class="login-icon"></i>
+                <span>Login</span>
+            </a>
+        </div>
+    </nav>
+
+    <header style="display: none;">
     </header>
 
     <section class="hero">
@@ -514,6 +587,56 @@
     </footer>
     <script>
         lucide.createIcons();
+
+        // Mobile Menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        const mobileDropdowns = document.querySelectorAll('.mobile-nav-dropdown');
+
+        function openMobileMenu() {
+            mobileNav.classList.add('active');
+            mobileNavOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            mobileNavOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', openMobileMenu);
+        }
+
+        if (mobileNavClose) {
+            mobileNavClose.addEventListener('click', closeMobileMenu);
+        }
+
+        if (mobileNavOverlay) {
+            mobileNavOverlay.addEventListener('click', closeMobileMenu);
+        }
+
+        // Mobile dropdown toggles
+        mobileDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.mobile-nav-dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    dropdown.classList.toggle('active');
+                    // Re-render icons after DOM changes
+                    setTimeout(() => lucide.createIcons(), 10);
+                });
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
 
         // Initialize Lenis smooth scroll
         const lenis = new Lenis({
