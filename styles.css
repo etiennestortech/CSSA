@@ -1377,30 +1377,7 @@ footer {
     }
 
     .utility-bar {
-        padding: 0.75rem 0;
-    }
-
-    .utility-bar .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .utility-nav {
         display: none;
-    }
-
-    .utility-actions {
-        gap: 0.75rem;
-    }
-
-    .event-phone {
-        font-size: 0.8125rem;
-    }
-
-    .btn-login {
-        padding: 0.5rem 1rem;
-        font-size: 0.8125rem;
     }
 
     .header-main .container {

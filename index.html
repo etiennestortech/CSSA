@@ -638,48 +638,55 @@
             }
         });
 
-        // Initialize Lenis smooth scroll
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 2
-        });
+        // Initialize Lenis smooth scroll (desktop only)
+        const isMobile = window.innerWidth <= 1024;
+        let lenis = null;
 
-        function raf(time) {
-            lenis.raf(time);
+        if (!isMobile) {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+                smoothTouch: false,
+                touchMultiplier: 2
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
             requestAnimationFrame(raf);
         }
 
-        requestAnimationFrame(raf);
+        // Hero parallax effect (desktop only)
+        if (!isMobile) {
+            const heroImage = document.querySelector('.hero-image');
+            let ticking = false;
 
-        // Hero parallax effect
-        const heroImage = document.querySelector('.hero-image');
-        let ticking = false;
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector('.hero');
 
-        function updateParallax() {
-            const scrolled = window.pageYOffset;
-            const heroSection = document.querySelector('.hero');
+                if (heroSection && heroImage) {
+                    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
 
-            if (heroSection && heroImage) {
-                const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-
-                if (scrolled < heroBottom) {
-                    const parallaxSpeed = scrolled * 0.5;
-                    heroImage.style.transform = `translate3d(0, ${parallaxSpeed}px, 0)`;
+                    if (scrolled < heroBottom) {
+                        const parallaxSpeed = scrolled * 0.5;
+                        heroImage.style.transform = `translate3d(0, ${parallaxSpeed}px, 0)`;
+                    }
                 }
+
+                ticking = false;
             }
 
-            ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            });
         }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        });
 
         // Hero text split animation
         window.addEventListener('DOMContentLoaded', () => {
