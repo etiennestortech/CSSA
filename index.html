@@ -330,7 +330,13 @@
 
     <section class="schedule">
         <div class="container">
-            <h2>Schedule of Events</h2>
+            <div class="schedule-header">
+                <h2>Schedule of Events</h2>
+                <button class="btn btn-primary" onclick="downloadCalendar()">
+                    <i data-lucide="calendar-plus"></i>
+                    Add Schedule to Calendar
+                </button>
+            </div>
             <div class="calendar-grid">
                 <div class="calendar-header">
                     <div class="day-header">
@@ -742,6 +748,131 @@
                 observer.observe(el);
             });
         });
+
+        // Calendar download function
+        function downloadCalendar() {
+            const events = [
+                {
+                    title: 'CSSA Event Registration Check-in and Welcome Reception',
+                    start: '20260127T170000',
+                    end: '20260127T190000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Welcome reception for CSSA event attendees'
+                },
+                {
+                    title: 'Complimentary Breakfast',
+                    start: '20260128T070000',
+                    end: '20260128T083000',
+                    location: 'Equinox 1-2-3 Ballroom',
+                    description: 'Complimentary breakfast for all attendees'
+                },
+                {
+                    title: 'CSSA Self Storage Industry Roundtable Discussions',
+                    start: '20260128T083000',
+                    end: '20260128T110000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Industry roundtable discussions'
+                },
+                {
+                    title: 'Table Top Display "Trade Show"',
+                    start: '20260128T070000',
+                    end: '20260128T110000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Vendor displays and trade show'
+                },
+                {
+                    title: 'Shuttle departs Le Westin Hotel',
+                    start: '20260128T163000',
+                    end: '20260128T172000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Shuttle service to event venue (departures at 4:30 pm & 5:20 pm)'
+                },
+                {
+                    title: 'CSSA Après Ski Party',
+                    start: '20260128T170000',
+                    end: '20260128T200000',
+                    location: 'Snow Tubing at AX Hotel/Adventure Neiges',
+                    description: 'Evening après ski party with snow tubing activities'
+                },
+                {
+                    title: 'Shuttle returns to Le Westin Hotel',
+                    start: '20260128T193000',
+                    end: '20260128T202000',
+                    location: 'AX Hotel/Adventure Neiges',
+                    description: 'Return shuttle service (departures at 7:30 pm & 8:20 pm)'
+                },
+                {
+                    title: 'Complimentary Breakfast',
+                    start: '20260129T070000',
+                    end: '20260129T083000',
+                    location: 'Equinox 1-2-3 Ballroom',
+                    description: 'Complimentary breakfast for all attendees'
+                },
+                {
+                    title: 'Table Top Display "Trade Show"',
+                    start: '20260129T070000',
+                    end: '20260129T110000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Vendor displays and trade show'
+                },
+                {
+                    title: 'Networking in the Table Top Sponsor "Trade Show"',
+                    start: '20260129T083000',
+                    end: '20260129T093000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Networking opportunity with sponsors'
+                },
+                {
+                    title: 'KEYNOTE PRESENTATION - Best Practices in the Operation of your Self Storage Facility in Canada',
+                    start: '20260129T093000',
+                    end: '20260129T103000',
+                    location: 'Le Westin Resort & Spa, Mont-Tremblant, QC',
+                    description: 'Keynote speakers: Mr. Simon Berman and Mr. Phil Dewsbury'
+                },
+                {
+                    title: 'Closing Gala Dinner and Reception',
+                    start: '20260129T183000',
+                    end: '20260130T000000',
+                    location: 'Chalet des Voyaguers',
+                    description: 'Closing gala dinner and reception'
+                }
+            ];
+
+            // Generate ICS file content
+            let icsContent = 'BEGIN:VCALENDAR\r\n';
+            icsContent += 'VERSION:2.0\r\n';
+            icsContent += 'PRODID:-//CSSA//CSSA Event 2026//EN\r\n';
+            icsContent += 'CALSCALE:GREGORIAN\r\n';
+            icsContent += 'METHOD:PUBLISH\r\n';
+            icsContent += 'X-WR-CALNAME:CSSA 2026 Self Storage Event\r\n';
+            icsContent += 'X-WR-TIMEZONE:America/Toronto\r\n';
+
+            events.forEach((event, index) => {
+                icsContent += 'BEGIN:VEVENT\r\n';
+                icsContent += `UID:${Date.now()}-${index}@cssa-event.com\r\n`;
+                icsContent += `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z\r\n`;
+                icsContent += `DTSTART:${event.start}\r\n`;
+                icsContent += `DTEND:${event.end}\r\n`;
+                icsContent += `SUMMARY:${event.title}\r\n`;
+                icsContent += `DESCRIPTION:${event.description}\r\n`;
+                icsContent += `LOCATION:${event.location}\r\n`;
+                icsContent += 'STATUS:CONFIRMED\r\n';
+                icsContent += 'SEQUENCE:0\r\n';
+                icsContent += 'END:VEVENT\r\n';
+            });
+
+            icsContent += 'END:VCALENDAR\r\n';
+
+            // Create download
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'CSSA-2026-Event-Schedule.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
     </script>
 </body>
 </html>
