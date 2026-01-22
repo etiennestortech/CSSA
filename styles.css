@@ -579,6 +579,7 @@ header {
 .speakers {
     margin-top: 2rem;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 }
 
@@ -1573,6 +1574,10 @@ footer {
 
     .btn {
         width: 100%;
+    }
+
+    .speakers {
+        grid-template-columns: 1fr;
     }
 
     .speaker {
