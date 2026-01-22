@@ -591,8 +591,14 @@ header {
     background: var(--light-gray);
     border-radius: 0.5rem;
     display: flex;
+    flex-direction: column;
     gap: 1.5rem;
-    align-items: flex-start;
+}
+
+.speaker-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .speaker-photo {
@@ -618,7 +624,6 @@ header {
 .speaker-title {
     color: var(--red);
     font-weight: 600;
-    margin-bottom: 0.75rem;
     display: block;
 }
 
@@ -1584,15 +1589,22 @@ footer {
     }
 
     .speaker {
+        padding: 1.5rem;
+    }
+
+    .speaker-header {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 1.5rem;
     }
 
     .speaker-photo {
         width: 8rem;
         height: 8rem;
+    }
+
+    .speaker p {
+        text-align: center;
     }
 
     .sponsor-logos {
