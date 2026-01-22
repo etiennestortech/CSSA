@@ -415,7 +415,7 @@ header {
     font-size: 1.375rem;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 0.125rem solid var(--red);
+    border-bottom: 0.125rem solid var(--medium-gray);
 }
 
 .include-card p {
