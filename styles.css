@@ -55,6 +55,14 @@ header {
     background: var(--light-gray);
     border-bottom: 0.0625rem solid var(--medium-gray);
     padding: 0.5rem 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+header.scrolled .utility-bar {
+    transform: translateY(-100%);
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
 }
 
 .utility-bar .container {
@@ -500,7 +508,7 @@ header {
 }
 
 .price {
-    font-size: 3rem;
+    font-size: 2.25rem;
     font-weight: 700;
     color: var(--navy);
     margin: 1.5rem 0;
@@ -1775,7 +1783,7 @@ footer {
     }
 
     .price {
-        font-size: 2.25rem;
+        font-size: 1.875rem;
     }
 }
 
