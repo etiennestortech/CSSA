@@ -1358,7 +1358,7 @@ footer {
     font-weight: 600;
 }
 
-/* Responsive Design */
+/* Responsive Design - Mobile Optimized */
 @media (max-width: 1024px) {
     .main-nav {
         gap: 1.25rem;
