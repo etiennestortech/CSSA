@@ -851,6 +851,10 @@ header.scrolled .utility-bar {
     font-style: italic;
 }
 
+.info-card > .btn {
+    margin-top: auto;
+}
+
 .button-group {
     display: flex;
     gap: 0.5rem;
