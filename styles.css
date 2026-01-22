@@ -652,7 +652,7 @@ header.scrolled .utility-bar {
 }
 
 .speaker p {
-    color: var(--text-dark);
+    color: var(--text-light);
     line-height: 1.7;
 }
 
