@@ -366,9 +366,21 @@ header {
 
 .includes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 2rem;
     margin-top: 3rem;
+}
+
+.include-card {
+    grid-column: span 2;
+}
+
+.include-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.include-card:nth-child(5) {
+    grid-column: 4 / span 2;
 }
 
 .include-card {
@@ -1397,6 +1409,19 @@ footer {
         font-size: 0.8125rem;
     }
 
+    .includes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .include-card {
+        grid-column: span 1;
+    }
+
+    .include-card:nth-child(4),
+    .include-card:nth-child(5) {
+        grid-column: span 1;
+    }
+
     .info-cards {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
@@ -1490,6 +1515,15 @@ footer {
     .info-cards {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .include-card {
+        grid-column: span 1;
+    }
+
+    .include-card:nth-child(4),
+    .include-card:nth-child(5) {
+        grid-column: span 1;
     }
 
     .include-card,
